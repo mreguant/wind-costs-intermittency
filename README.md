@@ -5,7 +5,7 @@ Authors: Claire Petersen and Mar Reguant
 ## Description
 This repository replicates the results for the paper "Quantifying the Impact of Wind Power in the Spanish Electricity Market." It has been run mostly using Stata although R and Python are used for pre-data processing. 
 
-Note: Due to the large size of the raw files used in this project, the raw data are not provided.
+Note: Due to the large size of the raw files used in this project, the raw data are not provided. Raw data is available upon request.
 
 ## code_stata
 The primary analysis of this paper is generated using master_run_code.do. This organizational code runs a series of other do files, described below.
