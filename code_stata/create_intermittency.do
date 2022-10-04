@@ -8,7 +8,7 @@ set more off
 *set matsize 2000
 
 * READ DATA IN -----------------------------------------------------------------
-cd "$dirpath/data/"
+cd "$dirpath/data/input/"
 
 * Some totalcosts were missing
 use "data_systemcosts.dta", clear
@@ -135,8 +135,8 @@ sort year month day hour
 
 * Merge costs of deviations to wind farms
 
-merge 1:1 year month day hour using "$dirpath/data/data_deviations_all.dta", keep(3) nogen keepusing(wind_up wind_dw)
-merge 1:1 year month day hour using "$dirpath/data/data_deviationsprices.dta", keep(3) nogen keepusing(price_up price_dw)
+merge 1:1 year month day hour using "$dirpath/data/input/data_deviations_all.dta", keep(3) nogen keepusing(wind_up wind_dw)
+merge 1:1 year month day hour using "$dirpath/data/input/data_deviationsprices.dta", keep(3) nogen keepusing(price_up price_dw)
 
 
 replace wind_dw = wind_dw / 1000.0
@@ -151,18 +151,18 @@ gen ocost_dw    = (price_dw-price0)
 
 * Add weather controls
 
-merge 1:1  year month day hour using "$dirpath/data/data_weather_hourly.dta", keep(1 3) nogen
+merge 1:1  year month day hour using "$dirpath/data/input/data_weather_hourly.dta", keep(1 3) nogen
 gen tempMEANsq = tempMEAN*tempMEAN / 1000.0
 
 
 * Add wind
 
-merge 1:1  year month day hour using "$dirpath/data/data_wind_speed_merra.dta", keep(1 3) nogen
+merge 1:1  year month day hour using "$dirpath/data/input/data_wind_speed_merra.dta", keep(1 3) nogen
 
 
 * Add carbon pricies
 
-merge m:1 year month day using "$dirpath/data/EU_ETS_prices.dta", keep(1 3) nogen
+merge m:1 year month day using "$dirpath/data/input/EU_ETS_prices.dta", keep(1 3) nogen
 
 sort year month day hour
 fillmissing C_price, with(previous)
@@ -249,6 +249,8 @@ foreach var of varlist $controls_8 {
 	
 compress
 sort year month day hour
+*save "data_costs_intermittency.dta", replace
+cd "$dirpath/data/output/"
 save "data_costs_intermittency.dta", replace
 
 *** END OF FILE
