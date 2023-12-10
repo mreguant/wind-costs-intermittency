@@ -259,7 +259,6 @@
 	
 	*! NJC 1.0.0 16 Oct 2003 
 	program tabstatmat  
-		version 8
 		
 		args matout garbage 
 		if "`matout'" == "" | "`garbage'" != "" error 198 
@@ -305,7 +304,7 @@
 	replace yvar = "price0_margin" if yvar=="price0" & effect=="margins"
 	replace yvar = "price0_avg" if yvar=="price0" & effect=="average"
 	
-	keep if fe=="$fe_shift" & controls=="5"
+	keep if fe=="fe_sh" & controls=="5"
 	forvalues x = 1(1)5 {
 	    preserve
 		tempfile spline_`x'
@@ -330,7 +329,7 @@
 		* Computing PS and Welfare effects
 		foreach v in "yvalue" "ci_lb" "ci_ub" {
 		
-			tabstat `v', by(yvar) save
+			tabstat `v', by(yvar) stat(mean) save
 			tabstatmat f1
 
 			* producer surplus change is lost revenue plus deviation costs minus mg. cost reductions
