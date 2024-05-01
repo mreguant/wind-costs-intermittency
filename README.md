@@ -1,6 +1,7 @@
-# Code and data repository for "Quantifying the Impact of Wind Power in the Spanish Electricity Market" #
+# Code and data repository for "Measuring the Impact of Wind Power and Intermittency" #
 
-Authors: Claire Petersen and Mar Reguant
+Authors: Claire Petersen, Mar Reguant, and Lola Segura
+Publication: http://hdl.handle.net/10261/354739
 
 ## Description
 This repository replicates the results for the paper "Quantifying the Impact of Wind Power in the Spanish Electricity Market." It has been run mostly using Stata although R and Python are used for pre-data processing. 
